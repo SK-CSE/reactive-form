@@ -1,0 +1,212 @@
+<div class="card">
+  <div class="card-header">
+  </div>
+
+  <div class="card-body">
+    <form novalidate (ngSubmit)="save()" [formGroup]="oobForm">
+
+      <div class="form-group row mb-2">
+        <div class="col-md-8">
+          <input class="form-control" id="firstNameId" type="text" placeholder="username" formControlName="userName"
+            [ngClass]="{'is-invalid': (oobForm.get('userName').touched ||
+                                              oobForm.get('userName').dirty) &&
+                                              !oobForm.get('userName').valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="oobForm.get('userName').errors?.required">
+              Please enter your first name.
+            </span>
+            <span *ngIf="oobForm.get('userName').errors?.minlength">
+              The first name must be longer than 3 characters.
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="form-group row mb-2">
+        <div class="col-md-8">
+          <input class="form-control" id="lastNameId" type="text" placeholder="Enter your Linkedin profile URL"
+            formControlName="linkedinUrl" />
+        </div>
+      </div>
+      <div class="form-group row mb-2">
+        <div class="col-md-4">
+          <select class="form-control" id="state" formControlName="state">
+            <option value="" disabled selected hidden>Select a State...</option>
+            <option *ngFor="let x of a" value={{x}}>
+              {{x}}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <input class="form-control" id="lastNameId" type="text" placeholder="city*" formControlName="city" [ngClass]="{'is-invalid': (oobForm.get('city').touched ||
+                                            oobForm.get('city').dirty) &&
+                                            !oobForm.get('city').valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="oobForm.get('city').errors?.required">
+              Please enter your city.
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="form-group row mb-2">
+        <div class="col-md-4">
+          <input class="form-control" id="phoneId" type="tel" placeholder="DOB" formControlName="dob" />
+          <span class="invalid-feedback">
+            <span *ngIf="oobForm.get('dob').errors?.required">
+              Please enter your DOB.
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="form-group row mb-2">
+        <div class="col-md-8">
+          <select class="form-control" id="educational_history" formControlName="educational_history">
+            <option value="" disabled selected hidden>educational history*</option>
+            <option *ngFor="let x of a" value={{x}}>
+              {{x}}
+            </option>
+            <!-- <option *ngFor="let key of qualification | keys" value={{key}}>{{qualification[key]}}</option> -->
+          </select>
+          <span class="invalid-feedback">
+            <span *ngIf="oobForm.get('educational_history').errors?.required">
+              Please enter your educational_history.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <div class="col-md-8">
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" value="professional" formControlName="b2cType"> professional
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" value="entrepreneur" formControlName="b2cType"> entrepreneur
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" value="student" formControlName="b2cType"> student
+            </label>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!isStudent">
+        <div *ngIf="!isEntre">
+          <div class="form-group row mb-2">
+            <div class="col-md-4">
+              <input class="form-control" id="lastNameId" type="text" placeholder="Job Title*" formControlName="job_title"
+                [ngClass]="{'is-invalid': (oobForm.get('job_title').touched ||
+                                                        oobForm.get('job_title').dirty) &&
+                                                        !oobForm.get('job_title').valid }" />
+              <span class="invalid-feedback">
+                <span *ngIf="oobForm.get('job_title').errors?.required">
+                  Please enter your job title.
+                </span>
+              </span>
+            </div>
+            <div class="col-md-4">
+              <select class="form-control" id="state" formControlName="department">
+                <option value="" disabled selected hidden>Function/Department*</option>
+                <option *ngFor="let x of a" value={{x}}>
+                  {{x}}
+                </option>
+                <!-- <option *ngFor="let key of job_function | keys" value={{key}}>{{job_function[key]}}</option> -->
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row mb-2">
+            <div *ngIf="!isEntre" [ngClass]="isPro ? 'col-md-4':'col-md-8'">
+              <input class="form-control" id="lastNameId" type="text" placeholder="Company Name*" formControlName="company_name"
+                [ngClass]="{'is-invalid': (oobForm.get('company_name').touched ||
+                                                        oobForm.get('company_name').dirty) &&
+                                                        !oobForm.get('company_name').valid }" />
+              <span class="invalid-feedback">
+                <span *ngIf="oobForm.get('company_name').errors?.required">
+                  Please enter your company name.
+                </span>
+              </span>
+            </div>
+            <div *ngIf="!isStudent" class="col-md-4">
+              <select class="form-control" id="state" formControlName="industry">
+                <option value="" disabled selected hidden>Industry*</option>
+                <option *ngFor="let x of a" value={{x}}>
+                  {{x}}
+                </option>
+                <!-- <option *ngFor="let key of industry | keys" value={{key}}>{{industry[key]}}</option> -->
+              </select>
+            </div>
+          </div>
+
+      </div>
+      <div *ngIf="isStudent">
+        <div class="form-group row mb-2">
+          <div class="col-md-8">
+            <input class="form-control" id="firstNameId" type="text" placeholder="college/school" formControlName="college"
+              [ngClass]="{'is-invalid': (oobForm.get('college').touched ||
+                                                          oobForm.get('college').dirty) &&
+                                                          !oobForm.get('college').valid }" />
+            <span class="invalid-feedback">
+              <span *ngIf="oobForm.get('college').errors?.required">
+                Please enter your college name.
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="form-group row mb-2">
+          <div class="col-md-8">
+            <input class="form-control" id="firstNameId" type="text" placeholder="specialization" formControlName="specialization"
+              [ngClass]="{'is-invalid': (oobForm.get('specialization').touched ||
+                                                            oobForm.get('specialization').dirty) &&
+                                                            !oobForm.get('specialization').valid }" />
+            <span class="invalid-feedback">
+              <span *ngIf="oobForm.get('specialization').errors?.required">
+                Please enter your specialization name.
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <div class="col-md-8">
+          <select class="form-control" id="objective_training" formControlName="objective_training">
+            <option value="" disabled selected hidden>objective of the training*</option>
+            <option *ngFor="let x of a" value={{x}}>
+              {{x}}
+            </option>
+            <!-- <option *ngFor="let key of objective_of_taking_course | keys" value={{key}}>{{objective_of_taking_course[key]}}</option> -->
+          </select>
+        </div>
+      </div>
+      <div class="form-group row mb-2">
+        <div class="col-md-8">
+          <select class="form-control" id="training_funded_by" formControlName="training_funded_by">
+            <option value="" disabled selected hidden>training funded by*</option>
+            <option *ngFor="let x of a" value={{x}}>
+              {{x}}
+            </option>
+            <!-- <option *ngFor="let key of objective_of_taking_course | keys" value={{key}}>{{objective_of_taking_course[key]}}</option> -->
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <div class="offset-md-2 col-md-4">
+          <button class="btn btn-primary mr-3" type="submit" style="width:80px" [title]="oobForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+            [disabled]="!oobForm.valid">
+            Save
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<br>Dirty: {{ oobForm.dirty }}
+<br>Touched: {{ oobForm.touched }}
+<br>Valid: {{ oobForm.valid }}
+<br>Value: {{ oobForm.value | json }}
+<br>&nbsp;
